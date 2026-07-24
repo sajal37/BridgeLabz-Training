@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="Arrays/Arrays.csproj" Id="2d770fea-fa93-4450-ac49-98e23168287f" />
+  <Project Path="Google Classroom/Google Classroom.csproj" Id="3b7218bf-2fe1-4874-8e78-ab8c4e1bc8e1" />
   <Project Path="Practice/Basics.csproj" />
   <Project Path="String/String.csproj" />
 </Solution>
