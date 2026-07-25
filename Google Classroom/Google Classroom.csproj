@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,5 +7,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Week 1\Day 1\Practice Problem 1\" />
+    <Folder Include="Week 1\Day 1\Practice Problem 2\" />
+    <Folder Include="Week 1\Day 1\Practice Problem 3\" />
+    <Folder Include="Week 1\Day 2\02 C# Control Flow Level 1 Lab Practice\" />
+    <Folder Include="Week 1\Day 2\03 C# Control Flow Level 2 Lab Practice\" />
+    <Folder Include="Week 1\Day 2\04 C# Control Flow Level 3 Lab Practice\" />
+    <Folder Include="Week 1\Day 2\02 C# Arrays Level 1 Lab Practice\" />
+    <Folder Include="Week 1\Day 2\03 C# Arrays Level 2 Lab Practice\" />
+  </ItemGroup>
 
 </Project>
