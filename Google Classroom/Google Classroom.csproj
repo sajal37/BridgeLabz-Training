@@ -17,6 +17,9 @@
     <Folder Include="Week 1\Day 2\04 C# Control Flow Level 3 Lab Practice\" />
     <Folder Include="Week 1\Day 2\02 C# Arrays Level 1 Lab Practice\" />
     <Folder Include="Week 1\Day 2\03 C# Arrays Level 2 Lab Practice\" />
+    <Folder Include="Week 1\Day 3\02 C# Methods Level 1 Practice Programs\" />
+    <Folder Include="Week 1\Day 3\03 C# Methods Level 2 Practice Programs\" />
+    <Folder Include="Week 1\Day 3\04 C# Methods Level 3 Practice Programs\" />
   </ItemGroup>
 
 </Project>
