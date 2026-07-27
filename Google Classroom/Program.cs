@@ -1,3 +1,6 @@
+using Google_Classroom.Week_1.Day_3._04_C__Methods_Level_3_Practice_Programs;
+using Google_Classroom.Week_1.Day_3._03_C__Methods_Level_2_Practice_Programs;
+using Google_Classroom.Week_1.Day_3._02_C__Methods_Level_1_Practice_Programs;
 using Google_Classroom.Week_1.Day_2._03_C__Arrays_Level_2_Lab_Practice;
 using Google_Classroom.Week_1.Day_2._02_C__Arrays_Level_1_Lab_Practice;
 using Google_Classroom.Week_1.Day_2._04_C__Control_Flow_Level_3_Lab_Practice;
@@ -6,6 +9,48 @@ using Google_Classroom.Week_1.Day_2._02_C__Control_Flow_Level_1_Lab_Practice;
 using Google_Classroom.Practice_Problem_3;
 using Google_Classroom.Practice_Problem_2;
 using Google_Classroom.Practice_Problem_1;
+
+// Day 3: 04 C# Methods Level 3 Practice Programs
+//new Football_Team_Heights().Demo();
+//new Number_Checker_Utility_Part_1().Demo();
+//new Number_Checker_Utility_Part_2().Demo();
+//new Number_Checker_Utility_Part_3().Demo();
+//new Number_Checker_Utility_Part_4().Demo();
+//new Number_Checker_Utility_Part_5().Demo();
+//new Generate_Unique_OTP().Demo();
+//new Display_Month_Calendar().Demo();
+//new Euclidean_Distance_And_Line_Equation().Demo();
+//new Collinear_Points_Check().Demo();
+//new Zara_Employee_Bonus_Generator().Demo();
+//new Student_Scorecard_Generator().Demo();
+//new Matrix_Operations_Utility().Demo();
+
+// Day 3: 03 C# Methods Level 2 Practice Programs
+//new Factors_Analysis().Demo();
+//new Sum_Of_Natural_Numbers_Recursive().Demo();
+new Leap_Year_Check_Method().Demo();
+//new Unit_Converter_Distance().Demo();
+//new Unit_Converter_Extended().Demo();
+//new Unit_Converter_Full().Demo();
+//new Student_Vote_Checker().Demo();
+//new Youngest_And_Tallest_Friends_Method().Demo();
+//new Number_Analysis_Method().Demo();
+//new BMI_2D_Array_Method().Demo();
+//new Quadratic_Roots().Demo();
+//new Random_Array_Min_Max_Average().Demo();
+
+// Day 3: 02 C# Methods Level 1 Practice Programs
+//new Simple_Interest().Demo();
+//new Handshake_Calculation().Demo();
+//new Divide_Chocolates().Demo();
+//new Spring_Season_Check().Demo();
+//new Trigonometric_Functions().Demo();
+//new Smallest_And_Largest_Of_Three().Demo();
+//new Check_Number_Sign().Demo();
+//new Wind_Chill_Calculation().Demo();
+//new Athlete_Triangular_Park_Rounds().Demo();
+//new Sum_Of_Natural_Numbers_Method().Demo();
+//new Remainder_And_Quotient().Demo();
 
 // Day 2: 03 C# Arrays Level 2 Lab Practice
 //new Employee_Bonus_Zara().Demo();
@@ -17,7 +62,7 @@ using Google_Classroom.Practice_Problem_1;
 //new BMI_2D_Array_All_Persons().Demo();
 //new Student_Grade_Array().Demo();
 //new Student_Grade_2D_Array().Demo();
-new Digit_Frequency_Array().Demo();
+//new Digit_Frequency_Array().Demo();
 
 // Day 2: 02 C# Arrays Level 1 Lab Practice
 //new Student_Voting_Eligibility_Array().Demo();
@@ -114,7 +159,5 @@ new Digit_Frequency_Array().Demo();
 //new Calculate_Simple_Interest().Demo();
 //new Perimeter_of_a_Rectangle().Demo();
 //new Power_Calculation().Demo();
-new Calculate_Average_of_Three_Numbers().Demo();
+//new Calculate_Average_of_Three_Numbers().Demo();
 //new Convert_Kilometers_to_Miles().Demo();
-
-
