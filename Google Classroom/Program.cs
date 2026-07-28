@@ -1,3 +1,4 @@
+using Google_Classroom.Week_1.Day_4.Day_8_Problem_Statement;
 using Google_Classroom.Week_1.Day_3._04_C__Methods_Level_3_Practice_Programs;
 using Google_Classroom.Week_1.Day_3._03_C__Methods_Level_2_Practice_Programs;
 using Google_Classroom.Week_1.Day_3._02_C__Methods_Level_1_Practice_Programs;
@@ -9,6 +10,20 @@ using Google_Classroom.Week_1.Day_2._02_C__Control_Flow_Level_1_Lab_Practice;
 using Google_Classroom.Practice_Problem_3;
 using Google_Classroom.Practice_Problem_2;
 using Google_Classroom.Practice_Problem_1;
+
+// Day 4: Day 8 Problem Statement
+//new Count_Vowels_and_Consonants().Demo();
+//new Reverse_a_String().Demo();
+//new Palindrome_String_Check().Demo();
+//new Remove_Duplicates_from_a_String().Demo();
+//new Find_the_Longest_Word_in_a_Sentence().Demo();
+//new Find_Substring_Occurrences().Demo();
+//new Toggle_Case_of_Characters().Demo();
+//new Compare_Two_Strings().Demo();
+//new Find_the_Most_Frequent_Character().Demo();
+//new Remove_a_Specific_Character_from_a_String().Demo();
+//new Anagram_Check().Demo();
+new Replace_Word_in_Sentence().Demo();
 
 // Day 3: 04 C# Methods Level 3 Practice Programs
 //new Football_Team_Heights().Demo();
@@ -28,7 +43,7 @@ using Google_Classroom.Practice_Problem_1;
 // Day 3: 03 C# Methods Level 2 Practice Programs
 //new Factors_Analysis().Demo();
 //new Sum_Of_Natural_Numbers_Recursive().Demo();
-new Leap_Year_Check_Method().Demo();
+//new Leap_Year_Check_Method().Demo();
 //new Unit_Converter_Distance().Demo();
 //new Unit_Converter_Extended().Demo();
 //new Unit_Converter_Full().Demo();
