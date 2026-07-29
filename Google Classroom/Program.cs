@@ -1,3 +1,5 @@
+using Google_Classroom.Week_1.Day_5.Problem_Statment;
+using Google_Classroom.Week_1.Day_5.Problem_Statements_for_Practice;
 using Google_Classroom.Week_1.Day_4.Day_8_Problem_Statement;
 using Google_Classroom.Week_1.Day_3._04_C__Methods_Level_3_Practice_Programs;
 using Google_Classroom.Week_1.Day_3._03_C__Methods_Level_2_Practice_Programs;
@@ -11,6 +13,23 @@ using Google_Classroom.Practice_Problem_3;
 using Google_Classroom.Practice_Problem_2;
 using Google_Classroom.Practice_Problem_1;
 
+// Day 5: Problem Statment
+//new Number_Guessing_Game().Demo();
+//new Maximum_of_Three_Numbers().Demo();
+//new Prime_Number_Checker().Demo();
+new Fibonacci_Sequence_Generator().Demo();
+//new Palindrome_Checker().Demo();
+//new Factorial_Using_Recursion().Demo();
+//new GCD_and_LCM_Calculator().Demo();
+//new Temperature_Converter().Demo();
+//new Basic_Calculator().Demo();
+
+// Day 5: Problem Statements for Practice
+//new Time_Zones_and_DateTimeOffset().Demo();
+//new Date_Arithmetic().Demo();
+//new Date_Formatting().Demo();
+//new Date_Comparison().Demo();
+
 // Day 4: Day 8 Problem Statement
 //new Count_Vowels_and_Consonants().Demo();
 //new Reverse_a_String().Demo();
@@ -23,7 +42,7 @@ using Google_Classroom.Practice_Problem_1;
 //new Find_the_Most_Frequent_Character().Demo();
 //new Remove_a_Specific_Character_from_a_String().Demo();
 //new Anagram_Check().Demo();
-new Replace_Word_in_Sentence().Demo();
+//new Replace_Word_in_Sentence().Demo();
 
 // Day 3: 04 C# Methods Level 3 Practice Programs
 //new Football_Team_Heights().Demo();
