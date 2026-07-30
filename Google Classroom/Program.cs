@@ -1,3 +1,4 @@
+using Google_Classroom.Week_1.Day_6._01_Java_Class_and_Object_Level_1_Lab_Practice;
 using Google_Classroom.Week_1.Day_5.Problem_Statment;
 using Google_Classroom.Week_1.Day_5.Problem_Statements_for_Practice;
 using Google_Classroom.Week_1.Day_4.Day_8_Problem_Statement;
@@ -13,11 +14,16 @@ using Google_Classroom.Practice_Problem_3;
 using Google_Classroom.Practice_Problem_2;
 using Google_Classroom.Practice_Problem_1;
 
+// Day 6: _01_Java_Class_and_Object_Level_1_Lab_Practice
+//Display_Employee_Details.Main(args);
+//Compute_Area_of_a_Circle.Main(args);
+Handle_Book_Details.Main(args);
+
 // Day 5: Problem Statment
 //new Number_Guessing_Game().Demo();
 //new Maximum_of_Three_Numbers().Demo();
 //new Prime_Number_Checker().Demo();
-new Fibonacci_Sequence_Generator().Demo();
+//new Fibonacci_Sequence_Generator().Demo();
 //new Palindrome_Checker().Demo();
 //new Factorial_Using_Recursion().Demo();
 //new GCD_and_LCM_Calculator().Demo();
