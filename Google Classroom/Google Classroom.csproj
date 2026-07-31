@@ -24,6 +24,8 @@
     <Folder Include="Week 1\Day 5\Problem Statements for Practice\" />
     <Folder Include="Week 1\Day 5\Problem Statment\" />
     <Folder Include="Week 1\Day 6\01 Java Class and Object Level 1 Lab Practice\" />
+    <Folder Include="Week 1\Day 7\02 Java Constructors, Instance vs. Class Variables, Access Modifiers Level 1 Lab Practice\" />
+    <Folder Include="Week 1\Day 7\03 this, sealed, static key words and is Operator Level 1 Lab Practice\" />
   </ItemGroup>
 
 </Project>

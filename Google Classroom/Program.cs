@@ -1,3 +1,5 @@
+using Google_Classroom.Week_1.Day_7._03_this__sealed__static_key_words_and_is_Operator_Level_1_Lab_Practice;
+using Google_Classroom.Week_1.Day_7._02_Java_Constructors__Instance_vs._Class_Variables__Access_Modifiers_Level_1_Lab_Practice;
 using Google_Classroom.Week_1.Day_6._01_Java_Class_and_Object_Level_1_Lab_Practice;
 using Google_Classroom.Week_1.Day_5.Problem_Statment;
 using Google_Classroom.Week_1.Day_5.Problem_Statements_for_Practice;
@@ -14,10 +16,28 @@ using Google_Classroom.Practice_Problem_3;
 using Google_Classroom.Practice_Problem_2;
 using Google_Classroom.Practice_Problem_1;
 
-// Day 6: _01_Java_Class_and_Object_Level_1_Lab_Practice
+// Day 7: 03 this, sealed, static keywords and is Operator Level 1 Lab Practice
+//Bank_Account_System.Main(args);
+//Library_Management_System.Main(args);
+//Employee_Management_System.Main(args);
+//Shopping_Cart_System.Main(args);
+University_Student_Management.Main(args);
+//Vehicle_Registration_System.Main(args);
+//Hospital_Management_System.Main(args);
+
+// Day 7: 02 Java Constructors, Instance vs. Class Variables, Access Modifiers Level 1 Lab Practice
+//Product_Inventory.Main(args);
+//Online_Course_Management.Main(args);
+//Vehicle_Registration.Main(args);
+//University_Management_System.Main(args);
+//Book_Library_System.Main(args);
+//Bank_Account_Management.Main(args);
+//Employee_Records.Main(args);
+
+// Day 6: 01 Java Class and Object Level 1 Lab Practice
 //Display_Employee_Details.Main(args);
 //Compute_Area_of_a_Circle.Main(args);
-Handle_Book_Details.Main(args);
+//Handle_Book_Details.Main(args);
 
 // Day 5: Problem Statment
 //new Number_Guessing_Game().Demo();
