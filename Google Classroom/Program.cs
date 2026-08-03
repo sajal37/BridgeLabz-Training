@@ -1,3 +1,4 @@
+using Google_Classroom.Week_2.Day_1.Sajal_Gupta___Submission_of_Inheritance;
 using Google_Classroom.Week_1.Day_7._03_this__sealed__static_key_words_and_is_Operator_Level_1_Lab_Practice;
 using Google_Classroom.Week_1.Day_7._02_Java_Constructors__Instance_vs._Class_Variables__Access_Modifiers_Level_1_Lab_Practice;
 using Google_Classroom.Week_1.Day_6._01_Java_Class_and_Object_Level_1_Lab_Practice;
@@ -16,12 +17,35 @@ using Google_Classroom.Practice_Problem_3;
 using Google_Classroom.Practice_Problem_2;
 using Google_Classroom.Practice_Problem_1;
 
+// Week 2 Day 1: Sajal Gupta - Submission of Inheritance
+
+// Hybrid Inheritance
+//new Restaurant_Management_System().Demo();
+//new Vehicle_Management_System().Demo();
+
+// Hierarchical Inheritance
+//new Bank_Account_Types().Demo();
+//new School_System_with_Different_Roles().Demo();
+
+// Multilevel Inheritance
+//new Online_Retail_Order_Management().Demo();
+//new Educational_Course_Hierarchy().Demo();
+
+// Single Inheritance
+//new Library_Management_with_Books_and_Authors().Demo();
+//new Smart_Home_Devices().Demo();
+
+// Assisted Problems
+//new Animal_Hierarchy().Demo();
+//new Employee_Management_System().Demo();
+//new Vehicle_and_Transport_System().Demo();
+
 // Day 7: 03 this, sealed, static keywords and is Operator Level 1 Lab Practice
 //Bank_Account_System.Main(args);
 //Library_Management_System.Main(args);
 //Employee_Management_System.Main(args);
 //Shopping_Cart_System.Main(args);
-University_Student_Management.Main(args);
+//University_Student_Management.Main(args);
 //Vehicle_Registration_System.Main(args);
 //Hospital_Management_System.Main(args);
 
