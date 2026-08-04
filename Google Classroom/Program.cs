@@ -1,3 +1,4 @@
+using Google_Classroom.Week_2.Day_2._06_Submission_of_Encapsulation__Polymorphism__Interface_and_Abstract_Class;
 using Google_Classroom.Week_2.Day_1.Sajal_Gupta___Submission_of_Inheritance;
 using Google_Classroom.Week_1.Day_7._03_this__sealed__static_key_words_and_is_Operator_Level_1_Lab_Practice;
 using Google_Classroom.Week_1.Day_7._02_Java_Constructors__Instance_vs._Class_Variables__Access_Modifiers_Level_1_Lab_Practice;
@@ -16,6 +17,16 @@ using Google_Classroom.Week_1.Day_2._02_C__Control_Flow_Level_1_Lab_Practice;
 using Google_Classroom.Practice_Problem_3;
 using Google_Classroom.Practice_Problem_2;
 using Google_Classroom.Practice_Problem_1;
+
+// Week 2 Day 2: 06 Submission of Encapsulation, Polymorphism, Interface and Abstract Class
+//new Employee_Management_System().Demo();
+//new E_Commerce_Platform().Demo();
+//new Vehicle_Rental_System().Demo();
+//new Banking_System().Demo();
+//new Library_Management_System().Demo();
+//new Online_Food_Delivery_System().Demo();
+//new Hospital_Patient_Management().Demo();
+//new Ride_Hailing_Application().Demo();
 
 // Week 2 Day 1: Sajal Gupta - Submission of Inheritance
 
