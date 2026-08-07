@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Google_Classroom.Week_2.Day_1.Sajal_Gupta___Submission_of_Inheritance
+namespace Google_Classroom.Week_2.Day_1.Sajal_Gupta___Submission_of_Inheritance_Restaurant
 {
     internal class Restaurant_Management_System
     {

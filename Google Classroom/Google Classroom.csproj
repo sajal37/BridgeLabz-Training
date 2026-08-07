@@ -28,6 +28,9 @@
     <Folder Include="Week 1\Day 7\03 this, sealed, static key words and is Operator Level 1 Lab Practice\" />
     <Folder Include="Week 2\Day 1\Sajal Gupta - Submission of Inheritance\" />
     <Folder Include="Week 2\Day 2\06 Submission of Encapsulation, Polymorphism, Interface and Abstract Class\" />
+    <Folder Include="Week 2\Day 3\05 Submission of NUnit\Actual Work\" />
+    <Folder Include="Week 2\Day 3\05 Submission of NUnit\Testing\" />
+    <Folder Include="Week 2\Day 3\05 Submission of Regex\" />
   </ItemGroup>
 
 </Project>

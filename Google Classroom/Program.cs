@@ -1,3 +1,5 @@
+using Google_Classroom.Week_2.Day_3._05_Submission_of_Regex;
+using Google_Classroom.Week_2.Day_3._05_Submission_of_NUnit.Actual_Work;
 using Google_Classroom.Week_2.Day_2._06_Submission_of_Encapsulation__Polymorphism__Interface_and_Abstract_Class;
 using Google_Classroom.Week_2.Day_1.Sajal_Gupta___Submission_of_Inheritance;
 using Google_Classroom.Week_1.Day_7._03_this__sealed__static_key_words_and_is_Operator_Level_1_Lab_Practice;
@@ -17,6 +19,25 @@ using Google_Classroom.Week_1.Day_2._02_C__Control_Flow_Level_1_Lab_Practice;
 using Google_Classroom.Practice_Problem_3;
 using Google_Classroom.Practice_Problem_2;
 using Google_Classroom.Practice_Problem_1;
+
+// Week 2 Day 3: 05 Submission of Regex
+//new Validate_a_Username().Demo();
+//new Validate_a_License_Plate_Number().Demo();
+//new Validate_a_Hex_Color_Code().Demo();
+//new Extract_All_Email_Addresses().Demo();
+//new Extract_All_Capitalized_Words().Demo();
+//new Extract_Dates_in_Format().Demo();
+//new Extract_Links_from_Web_Page().Demo();
+//new Replace_Multiple_Spaces().Demo();
+//new Censor_Bad_Words().Demo();
+//new Validate_an_IP_Address().Demo();
+//new Validate_a_Credit_Card_Number().Demo();
+//new Extract_Programming_Language_Names().Demo();
+//new Extract_Currency_Values().Demo();
+//new Find_Repeating_Words().Demo();
+//new Validate_Social_Security_Number().Demo();
+
+// Week 2 Day 3: 05 Submission of NUnit
 
 // Week 2 Day 2: 06 Submission of Encapsulation, Polymorphism, Interface and Abstract Class
 //new Employee_Management_System().Demo();
