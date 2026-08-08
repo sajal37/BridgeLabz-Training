@@ -31,6 +31,7 @@
     <Folder Include="Week 2\Day 3\05 Submission of NUnit\Actual Work\" />
     <Folder Include="Week 2\Day 3\05 Submission of NUnit\Testing\" />
     <Folder Include="Week 2\Day 3\05 Submission of Regex\" />
+    <Folder Include="Week 2\Day 4\01 - Submission of C# Generics\" />
   </ItemGroup>
 
 </Project>

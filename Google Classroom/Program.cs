@@ -1,3 +1,4 @@
+using Google_Classroom.Week_2.Day_4._01___Submission_of_C__Generics;
 using Google_Classroom.Week_2.Day_3._05_Submission_of_Regex;
 using Google_Classroom.Week_2.Day_3._05_Submission_of_NUnit.Actual_Work;
 using Google_Classroom.Week_2.Day_2._06_Submission_of_Encapsulation__Polymorphism__Interface_and_Abstract_Class;
@@ -19,6 +20,20 @@ using Google_Classroom.Week_1.Day_2._02_C__Control_Flow_Level_1_Lab_Practice;
 using Google_Classroom.Practice_Problem_3;
 using Google_Classroom.Practice_Problem_2;
 using Google_Classroom.Practice_Problem_1;
+
+// Week 2 Day 4: 01 - Submission of C# Generics
+//SmartWarehouse.Program.Main();
+//MealPlanGenerator.Program.Main();
+//UniversityCourseManagement.Program.Main();
+//ResumeScreeningSystem.ScreeningPipeline.Main();
+//OnlineMarketplace.MarketplaceManager.Main();
+
+// Week 2 Day 4: 01 - Submission of C# Generics
+//Smart_Warehouse_Management_System.Main(args);
+//Personalized_Meal_Plan_Generator.Main(args);
+//Multi_Level_University_Course_Management_System.Main(args);
+//AI_Driven_Resume_Screening_System.Main(args);
+//Dynamic_Online_Marketplace.Main(args);
 
 // Week 2 Day 3: 05 Submission of Regex
 //new Validate_a_Username().Demo();

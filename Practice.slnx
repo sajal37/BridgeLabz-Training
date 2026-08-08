@@ -5,5 +5,4 @@
   <Project Path="Oops/Oops.csproj" Id="b46a80f8-1c37-4fe1-bbd4-01d7f2916f97" />
   <Project Path="Practice/Basics.csproj" />
   <Project Path="String/String.csproj" />
-  <Project Path="test/test.csproj" Id="b56efae6-ee46-4d00-9845-a21f0ad2f2a2" />
 </Solution>
