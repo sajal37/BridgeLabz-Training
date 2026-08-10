@@ -1,4 +1,28 @@
+using Google_Classroom.Week_3.Day_1._02_Submission_of_Collections;
 using Google_Classroom.Week_2.Day_4._01___Submission_of_C__Generics;
+
+// Week 3 Day 1: 02 Submission of Collections
+//new Reverse_a_List().Demo();
+//new Find_Frequency_of_Elements().Demo();
+//new Rotate_Elements_in_a_List().Demo();
+//new Remove_Duplicates_While_Preserving_Order().Demo();
+//new Find_the_Nth_Element_from_the_End().Demo();
+//new Check_if_Two_Sets_Are_Equal().Demo();
+//new Union_and_Intersection_of_Two_Sets().Demo();
+//new Symmetric_Difference().Demo();
+//new Convert_a_Set_to_a_Sorted_List().Demo();
+//new Find_Subsets().Demo();
+//new Reverse_a_Queue().Demo();
+//new Generate_Binary_Numbers_Using_a_Queue().Demo();
+//new Hospital_Triage_System().Demo();
+//new Word_Frequency_Counter().Demo();
+//new Invert_a_Map().Demo();
+//Insurance_Policy_Management_System.Main(args);
+//Design_a_Voting_System.Main(args);
+//Implement_a_Shopping_Cart.Main(args);
+//Implement_a_Banking_System.Main(args);
+
+
 using Google_Classroom.Week_2.Day_3._05_Submission_of_Regex;
 using Google_Classroom.Week_2.Day_3._05_Submission_of_NUnit.Actual_Work;
 using Google_Classroom.Week_2.Day_2._06_Submission_of_Encapsulation__Polymorphism__Interface_and_Abstract_Class;
