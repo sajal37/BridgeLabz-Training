@@ -1,5 +1,18 @@
+using Google_Classroom.Week_3.Day_3.Submission_of_Stacks__Queues__Hash_Maps___Hash_Functions;
 using Google_Classroom.Week_3.Day_2.Submission_of_Data_Structure___LinkedList;
 using Google_Classroom.Week_3.Day_1._02_Submission_of_Collections;
+
+// Week 3 Day 3: Submission of Stacks, Queues, Hash Maps & Hash Functions
+//Implement_a_Queue_Using_Stacks.Main(args);
+//Sort_a_Stack_Using_Recursion.Main(args);
+//Stock_Span_Problem.Main(args);
+//Sliding_Window_Maximum.Main(args);
+//Circular_Tour_Problem.Main(args);
+//Find_All_Subarrays_with_Zero_Sum.Main(args);
+//Check_for_a_Pair_with_Given_Sum.Main(args);
+//Longest_Consecutive_Sequence.Main(args);
+//Implement_a_Custom_Hash_Map.Main(args);
+//Two_Sum_Problem.Main(args);
 
 // Week 3 Day 2: Submission of Data Structure - LinkedList
 //Student_Record_Management.Main(args);
