@@ -1,6 +1,16 @@
 using Google_Classroom.Week_3.Day_3.Submission_of_Stacks__Queues__Hash_Maps___Hash_Functions;
 using Google_Classroom.Week_3.Day_2.Submission_of_Data_Structure___LinkedList;
 using Google_Classroom.Week_3.Day_1._02_Submission_of_Collections;
+using Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms;
+
+// Week 3 Day 4: 03 - Submission of Sorting Algorithms
+//Bubble_Sort___Sort_Student_Marks.Main(args);
+//Insertion_Sort___Sort_Employee_IDs.Main(args);
+//Merge_Sort___Sort_an_Array_of_Book_Prices.Main(args);
+//Quick_Sort___Sort_Product_Prices.Main(args);
+//Selection_Sort___Sort_Exam_Scores.Main(args);
+//Heap_Sort___Sort_Job_Applicants_by_Salary.Main(args);
+//Counting_Sort___Sort_Student_Ages.Main(args);
 
 // Week 3 Day 3: Submission of Stacks, Queues, Hash Maps & Hash Functions
 //Implement_a_Queue_Using_Stacks.Main(args);

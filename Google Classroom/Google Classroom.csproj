@@ -35,6 +35,7 @@
     <Folder Include="Week 3\Day 1\02 Submission of Collections\" />
     <Folder Include="Week 3\Day 2\Submission of Data Structure - LinkedList\" />
     <Folder Include="Week 3\Day 3\Submission of Stacks, Queues, Hash Maps &amp; Hash Functions\" />
+    <Folder Include="Week 3\Day 4\03 - Submission of Sorting Algorithms\" />
   </ItemGroup>
 
   <ItemGroup>

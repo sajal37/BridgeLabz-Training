@@ -11,7 +11,7 @@ namespace Google_Classroom.Week_3.Day_3.Submission_of_Stacks__Queues__Hash_Maps_
             int[] arr = { 1, 3, -1, -3, 5, 3, 6, 7 };
             int k = 3;
             int n = arr.Length;
-            int[] result = new int[n - k + 1];
+            int[] Result = new int[n - k + 1];
             LinkedList<int> dq = new LinkedList<int>();
             for (int i = 0; i < n; i++)
             {
@@ -21,10 +21,9 @@ namespace Google_Classroom.Week_3.Day_3.Submission_of_Stacks__Queues__Hash_Maps_
                     dq.RemoveLast();
                 dq.AddLast(i);
                 if (i >= k - 1)
-                    result[i - k + 1] = arr[dq.First.Value];
+                    Result[i - k + 1] = arr[dq.First.Value];
             }
-            Console.Write("Sliding Window Maximums: ");
-            for (int i = 0; i < result.Length; i++) Console.Write($"{result[i]} ");
+            for (int i = 0; i < Result.Length; i++) Console.Write(Result[i] + " ");
         }
     }
 }

@@ -14,21 +14,21 @@ namespace Google_Classroom.Week_3.Day_3.Submission_of_Stacks__Queues__Hash_Maps_
             st.Push(4);
             st.Push(2);
             st.Push(5);
-            Console.Write("Original: ");
-            foreach (int x in st) Console.Write($"{x} ");
+            Console.Write("Before: ");
+            foreach (int x in st) Console.Write(x + " ");
             Console.WriteLine();
             SortStack(st);
-            Console.Write("Sorted: ");
-            foreach (int x in st) Console.Write($"{x} ");
+            Console.Write("After: ");
+            foreach (int x in st) Console.Write(x + " ");
         }
         static void SortStack(Stack<int> st)
         {
             if (st.Count == 0) return;
             int top = st.Pop();
             SortStack(st);
-            InsertSorted(st, top);
+            Insert(st, top);
         }
-        static void InsertSorted(Stack<int> st, int val)
+        static void Insert(Stack<int> st, int val)
         {
             if (st.Count == 0 || st.Peek() <= val)
             {
@@ -36,7 +36,7 @@ namespace Google_Classroom.Week_3.Day_3.Submission_of_Stacks__Queues__Hash_Maps_
                 return;
             }
             int top = st.Pop();
-            InsertSorted(st, val);
+            Insert(st, val);
             st.Push(top);
         }
     }
