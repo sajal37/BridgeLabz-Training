@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Text;
 
 namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
@@ -9,8 +10,7 @@ namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
         public static void Main(string[] args)
         {
             int[] empIds = { 105, 102, 108, 101, 104, 107 };
-            int n = empIds.Length;
-            for (int i = 1; i < n; i++)
+            for (int i = 1; i < empIds.Length; i++)
             {
                 int key = empIds[i];
                 int j = i - 1;
@@ -21,10 +21,7 @@ namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
                 }
                 empIds[j + 1] = key;
             }
-            Console.WriteLine("Sorted Employee IDs:");
-            for (int i = 0; i < n - 1; i++)
-                Console.WriteLine(empIds[i]);
-            Console.Write(empIds[n - 1]);
+            Console.Write(string.Join(" ", empIds));
         }
     }
 }

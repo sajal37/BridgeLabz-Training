@@ -8,21 +8,18 @@ namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
     {
         public static void Main(string[] args)
         {
-            double[] prices = { 499.50, 299.00, 799.99, 150.25, 350.00 };
+            double[] prices = { 499.5, 299, 799.99, 150.25, 350 };
             int n = prices.Length;
-            MergeSort(prices, 0, n - 1);
-            Console.WriteLine("Sorted Book Prices:");
-            for (int i = 0; i < n - 1; i++)
-                Console.WriteLine(prices[i]);
-            Console.Write(prices[n - 1]);
+            Sort(prices, 0, n - 1);
+            foreach (double p in prices) Console.Write(p + " ");
         }
-        static void MergeSort(double[] arr, int left, int right)
+        static void Sort(double[] arr, int left, int right)
         {
             if (left < right)
             {
                 int mid = left + (right - left) / 2;
-                MergeSort(arr, left, mid);
-                MergeSort(arr, mid + 1, right);
+                Sort(arr, left, mid);
+                Sort(arr, mid + 1, right);
                 Merge(arr, left, mid, right);
             }
         }

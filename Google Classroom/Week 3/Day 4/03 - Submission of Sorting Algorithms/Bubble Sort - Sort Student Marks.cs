@@ -22,10 +22,7 @@ namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
                     }
                 }
             }
-            Console.WriteLine("Sorted Student Marks:");
-            for (int i = 0; i < n - 1; i++)
-                Console.WriteLine(marks[i]);
-            Console.Write(marks[n - 1]);
+            for (int i = 0; i < n; i++) Console.Write(marks[i] + " ");
         }
     }
 }

@@ -9,12 +9,8 @@ namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
         public static void Main(string[] args)
         {
             double[] prices = { 1299.00, 499.99, 89.50, 2499.00, 150.00, 750.25 };
-            int n = prices.Length;
-            QuickSort(prices, 0, n - 1);
-            Console.WriteLine("Sorted Product Prices:");
-            for (int i = 0; i < n - 1; i++)
-                Console.WriteLine(prices[i]);
-            Console.Write(prices[n - 1]);
+            QuickSort(prices, 0, prices.Length - 1);
+            for (int i = 0; i < prices.Length; i++) Console.Write(prices[i] + " ");
         }
         static void QuickSort(double[] arr, int low, int high)
         {

@@ -22,10 +22,7 @@ namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
                 scores[minIdx] = scores[i];
                 scores[i] = temp;
             }
-            Console.WriteLine("Sorted Exam Scores:");
-            for (int i = 0; i < n - 1; i++)
-                Console.WriteLine(scores[i]);
-            Console.Write(scores[n - 1]);
+            for (int i = 0; i < n; i++) Console.Write(scores[i] + " ");
         }
     }
 }

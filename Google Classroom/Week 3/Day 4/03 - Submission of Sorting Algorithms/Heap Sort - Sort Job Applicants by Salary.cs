@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
 {
@@ -19,10 +20,7 @@ namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
                 salaries[i] = temp;
                 Heapify(salaries, i, 0);
             }
-            Console.WriteLine("Sorted Expected Salaries:");
-            for (int i = 0; i < n - 1; i++)
-                Console.WriteLine(salaries[i]);
-            Console.Write(salaries[n - 1]);
+            Console.Write(string.Join(" ", salaries));
         }
         static void Heapify(int[] arr, int n, int i)
         {

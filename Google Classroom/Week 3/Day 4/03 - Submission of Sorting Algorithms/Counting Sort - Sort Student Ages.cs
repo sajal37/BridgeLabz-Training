@@ -24,10 +24,7 @@ namespace Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms
                 output[count[ages[i] - minAge] - 1] = ages[i];
                 count[ages[i] - minAge]--;
             }
-            Console.WriteLine("Sorted Student Ages:");
-            for (int i = 0; i < n - 1; i++)
-                Console.WriteLine(output[i]);
-            Console.Write(output[n - 1]);
+            for (int i = 0; i < n; i++) Console.Write(output[i] + " ");
         }
     }
 }
