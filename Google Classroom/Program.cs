@@ -1,7 +1,20 @@
+using Google_Classroom.Week_4.Day_1._03_Submission_of_C__Streams;
 using Google_Classroom.Week_3.Day_3.Submission_of_Stacks__Queues__Hash_Maps___Hash_Functions;
 using Google_Classroom.Week_3.Day_2.Submission_of_Data_Structure___LinkedList;
 using Google_Classroom.Week_3.Day_1._02_Submission_of_Collections;
 using Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms;
+
+// Week 4 Day 1: 03 Submission of C# Streams
+//File_Handling___Read_and_Write_a_Text_File.Main(args);
+//Buffered_Streams___Efficient_File_Copy.Main(args);
+//Read_User_Input_from_Console.Main(args);
+//Serialization___Save_and_Retrieve_an_Object.Main(args);
+//ByteArray_Stream___Convert_Image_to_ByteArray.Main(args);
+//Filter_Streams___Convert_Uppercase_to_Lowercase.Main(args);
+//Data_Streams___Store_and_Retrieve_Primitive_Data.Main(args);
+//Piped_Streams___Inter_Thread_Communication.Main(args);
+//Read_a_Large_File_Line_by_Line.Main(args);
+//Count_Words_in_a_File.Main(args);
 
 // Week 3 Day 4: 03 - Submission of Sorting Algorithms
 //Bubble_Sort___Sort_Student_Marks.Main(args);

@@ -1,5 +1,4 @@
 <Solution>
-  <Project Path="Actual Work/Actual Work.csproj" />
   <Project Path="Arrays/Arrays.csproj" Id="2d770fea-fa93-4450-ac49-98e23168287f" />
   <Project Path="Date and Time/Date and Time.csproj" Id="da86cc4e-4e3d-4da8-a1fc-75fed91252fe" />
   <Project Path="Google Classroom/Google Classroom.csproj" Id="3b7218bf-2fe1-4874-8e78-ab8c4e1bc8e1" />
@@ -7,5 +6,4 @@
   <Project Path="Practice/Basics.csproj" />
   <Project Path="PracticeC#/PracticeC#.csproj" Id="4547ebd5-e41a-4c85-857c-d71b07ecb03c" />
   <Project Path="String/String.csproj" />
-  <Project Path="Testing/Testing.csproj" />
 </Solution>
