@@ -1,8 +1,34 @@
+using Google_Classroom.Week_4.Day_3._06__Submission_of_Algorithm_s_Runtime_Analysis___Big_O_Notation;
+using Google_Classroom.Week_4.Day_2._04_and_05_Submission_of_Linear_and_Binary_Search;
 using Google_Classroom.Week_4.Day_1._03_Submission_of_C__Streams;
 using Google_Classroom.Week_3.Day_3.Submission_of_Stacks__Queues__Hash_Maps___Hash_Functions;
 using Google_Classroom.Week_3.Day_2.Submission_of_Data_Structure___LinkedList;
 using Google_Classroom.Week_3.Day_1._02_Submission_of_Collections;
 using Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms;
+
+// Week 4 Day 3: 06- Submission of Algorithm's Runtime Analysis & Big-O Notation
+//Search_a_Target_in_a_Large_Dataset.Main(args);
+//Sorting_Large_Data_Efficiently.Main(args);
+//String_Concatenation_Performance.Main(args);
+//Large_File_Reading_Efficiency.Main(args);
+//Recursive_vs_Iterative_Fibonacci_Computation.Main(args);
+
+// Week 4 Day 2: 04 and 05 Submission of Linear and Binary Search
+//Reverse_a_String_Using_StringBuilder.Main(args);
+//Remove_Duplicates_from_a_String_Using_StringBuilder.Main(args);
+//Concatenate_Strings_Efficiently_Using_StringBuilder.Main(args);
+//Compare_StringBuilder_Performance.Main(args);
+//Read_a_File_Line_by_Line_Using_StreamReader.Main(args);
+//Count_the_Occurrence_of_a_Word_in_a_File_Using_StreamReader.Main(args);
+//Convert_Byte_Stream_to_Character_Stream_Using_StreamReader.Main(args);
+//Read_User_Input_and_Write_to_File_Using_StreamReader.Main(args);
+//Search_for_the_First_Negative_Number.Main(args);
+//Search_for_a_Specific_Word_in_a_List_of_Sentences.Main(args);
+//Find_the_Rotation_Point_in_a_Rotated_Sorted_Array.Main(args);
+//Find_the_Peak_Element_in_an_Array.Main(args);
+//Search_for_a_Target_Value_in_a_2D_Sorted_Matrix.Main(args);
+//Find_the_First_and_Last_Occurrence_of_an_Element_in_a_Sorted_Array.Main(args);
+//Challenge_Problem.Main(args);
 
 // Week 4 Day 1: 03 Submission of C# Streams
 //File_Handling___Read_and_Write_a_Text_File.Main(args);

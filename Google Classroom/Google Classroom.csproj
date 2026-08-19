@@ -37,6 +37,8 @@
     <Folder Include="Week 3\Day 3\Submission of Stacks, Queues, Hash Maps &amp; Hash Functions\" />
     <Folder Include="Week 3\Day 4\03 - Submission of Sorting Algorithms\" />
     <Folder Include="Week 4\Day 1\03 Submission of C# Streams\" />
+    <Folder Include="Week 4\Day 2\04 and 05 Submission of Linear and Binary Search\" />
+    <Folder Include="Week 4\Day 3\06- Submission of Algorithm's Runtime Analysis &amp; Big-O Notation\" />
   </ItemGroup>
 
   <ItemGroup>
