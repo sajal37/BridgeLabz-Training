@@ -1,3 +1,5 @@
+using Google_Classroom.Week_5.Day_2._01_02_Submission_of_JSON;
+using Google_Classroom.Week_5.Day_1._01_Submission_of_CSV_Data_Handling;
 using Google_Classroom.Week_4.Day_3._06__Submission_of_Algorithm_s_Runtime_Analysis___Big_O_Notation;
 using Google_Classroom.Week_4.Day_2._04_and_05_Submission_of_Linear_and_Binary_Search;
 using Google_Classroom.Week_4.Day_1._03_Submission_of_C__Streams;
@@ -5,6 +7,39 @@ using Google_Classroom.Week_3.Day_3.Submission_of_Stacks__Queues__Hash_Maps___Ha
 using Google_Classroom.Week_3.Day_2.Submission_of_Data_Structure___LinkedList;
 using Google_Classroom.Week_3.Day_1._02_Submission_of_Collections;
 using Google_Classroom.Week_3.Day_4._03___Submission_of_Sorting_Algorithms;
+
+// Week 5 Day 2: 01 02 Submission of JSON
+//Create_a_JSON_Object_for_a_Student.Main(args);
+//Convert_a_C__Object_into_JSON_Format.Main(args);
+//Read_a_JSON_File_and_Extract_Specific_Fields.Main(args);
+//Merge_Two_JSON_Objects.Main(args);
+//Validate_JSON_Structure_Using_Schema.Main(args);
+//Convert_a_List_of_C__Objects_into_a_JSON_Array.Main(args);
+//Parse_JSON_and_Filter_Records.Main(args);
+//Read_a_JSON_File_and_Print_All_Keys_and_Values.Main(args);
+//Validate_an_Email_Field_Using_JSON_Schema.Main(args);
+//Merge_Two_JSON_Files_into_a_Single_JSON_Object.Main(args);
+//Convert_JSON_to_XML_Format.Main(args);
+//Convert_CSV_Data_into_JSON.Main(args);
+//Generate_a_JSON_Report_from_Database_Records.Main(args);
+//IPL_and_Censorship_Analyzer.Main(args);
+
+// Week 5 Day 1: 01 Submission of CSV Data Handling
+//Read_a_CSV_File_and_Print_Data.Main(args);
+//Write_Data_to_a_CSV_File.Main(args);
+//Read_and_Count_Rows_in_a_CSV_File.Main(args);
+//Filter_Records_from_CSV.Main(args);
+//Search_for_a_Record_in_CSV.Main(args);
+//Modify_a_CSV_File__Update_a_Value_.Main(args);
+//Sort_CSV_Records_by_a_Column.Main(args);
+//Validate_CSV_Data_Before_Processing.Main(args);
+//Convert_CSV_Data_into_Objects.Main(args);
+//Merge_Two_CSV_Files.Main(args);
+//Read_Large_CSV_File_Efficiently.Main(args);
+//Detect_Duplicates_in_a_CSV_File.Main(args);
+//Generate_a_CSV_Report_from_Database.Main(args);
+//Convert_JSON_to_CSV_and_Vice_Versa.Main(args);
+//Encrypt_and_Decrypt_CSV_Data.Main(args);
 
 // Week 4 Day 3: 06- Submission of Algorithm's Runtime Analysis & Big-O Notation
 //Search_a_Target_in_a_Large_Dataset.Main(args);
