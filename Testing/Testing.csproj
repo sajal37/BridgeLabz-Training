@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Actual Work\Actual Work.csproj" />
     <ProjectReference Include="..\Ride Sharing\Ride Sharing.csproj" />
+    <ProjectReference Include="..\Warehouse Replenishment 1\Warehouse Replenishment.csproj" />
   </ItemGroup>
 
   <ItemGroup>
