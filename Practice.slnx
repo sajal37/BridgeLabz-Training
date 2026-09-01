@@ -9,4 +9,5 @@
   <Project Path="Ride Sharing/Ride Sharing.csproj" Id="6cc4aecc-0be6-4c4a-8052-894b7a55429e" />
   <Project Path="String/String.csproj" />
   <Project Path="Testing/Testing.csproj" />
+  <Project Path="Warehouse Replenishment/Warehouse Replenishment.csproj" Id="39402180-cd5a-446a-988b-cb942f0ddfbe" />
 </Solution>
