@@ -1,0 +1,79 @@
+Q1
+ALTER TABLE academics.students 
+ADD COLUMN phone_number VARCHAR(15),
+ADD COLUMN department VARCHAR(50);
+
+Q2
+ALTER TABLE academics.students 
+RENAME COLUMN full_name TO student_name;
+
+Q3
+ALTER TABLE academics.students 
+ALTER COLUMN cgpa TYPE NUMERIC(4,2);
+
+Q4
+CREATE TABLE academics.courses (
+    course_id SERIAL PRIMARY KEY,
+    course_name VARCHAR(100),
+    credits SMALLINT,
+    department VARCHAR(50)
+);
+
+Q5
+INSERT INTO academics.students (student_name, dob, email, phone_number, department, cgpa, is_active, skills, profile)
+VALUES 
+('Aman Sharma', '2002-05-14', 'aman.sharma@gmail.com', '9876543210', 'Electronics', 8.60, true, '{"Python", "SQL"}', '{"city": "Delhi", "year": 3}'),
+('Pooja Patel', '2003-08-22', 'pooja.p@gmail.com', '9812345678', 'Mechanical', 7.40, true, '{"C++", "AutoCAD"}', '{"city": "Ahmedabad", "year": 2}'),
+('Rahul Verma', '2001-12-10', 'rahul.v@gmail.com', '9723456789', 'Information Tech', 8.90, true, '{"Java", "Spring"}', '{"city": "Pune", "year": 4}'),
+('Neha Singh', '2002-03-30', 'neha.singh@gmail.com', '9634567890', 'Civil', 6.80, false, '{"AutoCAD"}', '{"city": "Lucknow", "year": 3}'),
+('Rohit Kumar', '2003-11-05', 'rohit.k@gmail.com', '9545678901', 'Electrical', 8.25, false, '{"MATLAB", "Python"}', '{"city": "Patna", "year": 2}');
+
+Q6
+INSERT INTO academics.courses (course_name, credits, department)
+VALUES 
+('Database Management Systems', 4, 'Computer Science'),
+('Data Structures and Algorithms', 4, 'Computer Science'),
+('Digital Electronics', 3, 'Electronics'),
+('Thermodynamics', 3, 'Mechanical');
+
+Q7
+UPDATE academics.students
+SET department = 'Computer Science'
+WHERE cgpa > 8.0;
+
+Q8
+DELETE FROM academics.students
+WHERE is_active = FALSE;
+
+Q9
+a)
+SELECT * FROM academics.students 
+ORDER BY cgpa DESC;
+
+b)
+SELECT student_name, email 
+FROM academics.students 
+WHERE department = 'Computer Science';
+
+Q10
+CREATE ROLE readonly_user WITH LOGIN PASSWORD 'Student@123';
+GRANT USAGE ON SCHEMA academics TO readonly_user;
+GRANT SELECT ON academics.students TO readonly_user;
+
+Q11
+REVOKE SELECT ON academics.students FROM readonly_user;
+
+If readonly_user tries to run select query, it will give error: permission denied for table students because select privilege was revoked.
+
+Q12
+CREATE TABLE academics.students_copy AS 
+SELECT * FROM academics.students WITH NO DATA;
+
+INSERT INTO academics.students_copy (student_name, email, department, cgpa)
+VALUES 
+('Test User 1', 'test1@gmail.com', 'Computer Science', 8.50),
+('Test User 2', 'test2@gmail.com', 'Mechanical', 7.20);
+
+TRUNCATE TABLE academics.students_copy RESTART IDENTITY;
+
+SELECT * FROM academics.students_copy;
