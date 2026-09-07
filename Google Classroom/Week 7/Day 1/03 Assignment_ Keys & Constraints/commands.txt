@@ -1,0 +1,163 @@
+Q1
+CREATE TABLE academics.departments (
+    dept_id SERIAL PRIMARY KEY,
+    dept_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+INSERT INTO academics.departments (dept_name)
+VALUES 
+('Computer Science'),
+('Information Tech'),
+('Electronics'),
+('Mechanical');
+
+Q2
+ALTER TABLE academics.students 
+ADD COLUMN dept_id INTEGER;
+
+ALTER TABLE academics.students 
+ADD CONSTRAINT fk_students_dept 
+FOREIGN KEY (dept_id) REFERENCES academics.departments(dept_id);
+
+Q3
+CREATE TABLE academics.enrollments (
+    student_id INTEGER REFERENCES academics.students(student_id),
+    course_id INTEGER REFERENCES academics.courses(course_id),
+    enroll_date DATE DEFAULT CURRENT_DATE,
+    grade CHAR(2),
+    PRIMARY KEY (student_id, course_id)
+);
+
+Q4
+ALTER TABLE academics.enrollments 
+ADD CONSTRAINT chk_enrollments_grade 
+CHECK (grade IN ('A+', 'A', 'B+', 'B', 'C', 'F') OR grade IS NULL);
+
+Q5
+a)
+ALTER TABLE academics.enrollments 
+DROP CONSTRAINT enrollments_student_id_fkey;
+
+ALTER TABLE academics.enrollments 
+ADD CONSTRAINT fk_enrollments_student 
+FOREIGN KEY (student_id) REFERENCES academics.students(student_id) ON DELETE CASCADE;
+
+b)
+INSERT INTO academics.students (student_name, email) 
+VALUES ('Ravi Singh', 'ravi.singh@gmail.com');
+
+INSERT INTO academics.enrollments (student_id, course_id, grade) 
+VALUES 
+((SELECT student_id FROM academics.students WHERE email = 'ravi.singh@gmail.com'), 1, 'A'),
+((SELECT student_id FROM academics.students WHERE email = 'ravi.singh@gmail.com'), 2, 'B');
+
+DELETE FROM academics.students 
+WHERE email = 'ravi.singh@gmail.com';
+
+SELECT * FROM academics.enrollments;
+
+Q6
+a)
+ALTER TABLE academics.enrollments 
+DROP CONSTRAINT enrollments_course_id_fkey;
+
+ALTER TABLE academics.enrollments 
+ADD CONSTRAINT fk_enrollments_course 
+FOREIGN KEY (course_id) REFERENCES academics.courses(course_id) ON DELETE RESTRICT;
+
+b)
+INSERT INTO academics.enrollments (student_id, course_id, grade)
+VALUES ((SELECT student_id FROM academics.students LIMIT 1), 1, 'A');
+
+DELETE FROM academics.courses WHERE course_id = 1;
+
+ERROR: update or delete on table "courses" violates foreign key constraint "fk_enrollments_course" on table "enrollments"
+DETAIL: Key (course_id)=(1) is still referenced from table "enrollments".
+
+c)
+If we use CASCADE here, deleting a course would automatically delete all student grades and enrollment history for that course. RESTRICT prevents deleting the course by accident, so student academic records are preserved safely.
+
+Q7
+ALTER TABLE academics.students 
+ADD CONSTRAINT unique_student_email UNIQUE (email);
+
+INSERT INTO academics.students (student_name, email)
+VALUES ('Aman Kumar', 'aman.sharma@gmail.com');
+
+ERROR: duplicate key value violates unique constraint "unique_student_email"
+DETAIL: Key (email)=(aman.sharma@gmail.com) already exists.
+
+Q8
+a)
+CREATE TABLE academics.advisors (
+    advisor_id SERIAL PRIMARY KEY,
+    advisor_name VARCHAR(100) NOT NULL
+);
+
+b)
+ALTER TABLE academics.students 
+ADD COLUMN advisor_id INTEGER;
+
+ALTER TABLE academics.students 
+ADD CONSTRAINT fk_students_advisor 
+FOREIGN KEY (advisor_id) REFERENCES academics.advisors(advisor_id) ON DELETE SET NULL;
+
+c)
+INSERT INTO academics.advisors (advisor_name) 
+VALUES ('Dr. Sharma');
+
+UPDATE academics.students 
+SET advisor_id = 1 
+WHERE student_id = (SELECT student_id FROM academics.students LIMIT 1);
+
+DELETE FROM academics.advisors 
+WHERE advisor_id = 1;
+
+SELECT student_id, student_name, advisor_id 
+FROM academics.students 
+WHERE student_id = (SELECT student_id FROM academics.students LIMIT 1);
+
+Q9
+ALTER TABLE academics.courses 
+ADD COLUMN dept_id INTEGER REFERENCES academics.departments(dept_id);
+
+ALTER TABLE academics.courses 
+ADD CONSTRAINT unique_dept_course UNIQUE (dept_id, course_name);
+
+Q10
+What was wrong:
+The insert failed because student_id 9999 does not exist in students table, so it violates the foreign key constraint.
+
+Working statement:
+INSERT INTO academics.enrollments (student_id, course_id, grade)
+VALUES ((SELECT student_id FROM academics.students LIMIT 1), 1, 'A+');
+
+Q11
+ALTER TABLE academics.students 
+ADD COLUMN age SMALLINT;
+
+UPDATE academics.students 
+SET age = 20;
+
+ALTER TABLE academics.students 
+ADD CONSTRAINT chk_student_cgpa_age 
+CHECK (cgpa >= 0 AND cgpa <= 10 AND age >= 16);
+
+Q12
+CREATE TABLE academics.employees (
+    emp_id SERIAL PRIMARY KEY,
+    emp_name VARCHAR(100) NOT NULL,
+    manager_id INTEGER REFERENCES academics.employees(emp_id)
+);
+
+INSERT INTO academics.employees (emp_id, emp_name, manager_id)
+VALUES 
+(1, 'Dr. Rajesh Sharma', NULL),
+(2, 'Prof. Amit Kumar', 1),
+(3, 'Prof. Sunita Rao', 1);
+
+SELECT 
+    e.emp_name AS employee_name, 
+    m.emp_name AS manager_name
+FROM academics.employees e
+LEFT JOIN academics.employees m ON e.manager_id = m.emp_id;
