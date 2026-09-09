@@ -1,0 +1,24 @@
+{
+  "subjects": [
+    {
+      "code": "MATH",
+      "credits": 4
+    },
+    {
+      "code": "SCI",
+      "credits": 4
+    },
+    {
+      "code": "ENG",
+      "credits": 3
+    },
+    {
+      "code": "HIST",
+      "credits": 3
+    },
+    {
+      "code": "GEO",
+      "credits": 2
+    }
+  ]
+}
