@@ -44,6 +44,7 @@
     <Folder Include="Week 6\Day 1\Submission of DDL, DML &amp; DCL\" />
     <Folder Include="Week 7\Day 1\03 Assignment_ Keys &amp; Constraints\" />
     <Folder Include="Week 7\Day 2\Assignment_ Joins &amp; its Types\" />
+    <Folder Include="Week 7\Day 3\Assignment_ Sub-queries &amp; CTEs\" />
   </ItemGroup>
 
   <ItemGroup>

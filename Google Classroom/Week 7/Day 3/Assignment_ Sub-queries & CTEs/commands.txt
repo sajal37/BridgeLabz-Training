@@ -1,0 +1,165 @@
+Q1
+SELECT student_name AS full_name, cgpa 
+FROM academics.students 
+WHERE cgpa > (SELECT AVG(cgpa) FROM academics.students);
+
+Q2
+SELECT student_name AS full_name 
+FROM academics.students 
+WHERE student_id IN (
+    SELECT student_id 
+    FROM academics.enrollments 
+    WHERE grade = 'A+'
+);
+
+Q3
+SELECT s.student_id, s.student_name AS full_name 
+FROM academics.students s 
+WHERE NOT EXISTS (
+    SELECT 1 
+    FROM academics.enrollments e 
+    WHERE e.student_id = s.student_id
+);
+
+Q4
+SELECT s.student_name AS full_name, d.dept_name, s.cgpa 
+FROM academics.students s 
+JOIN academics.departments d ON s.dept_id = d.dept_id 
+WHERE s.cgpa = (
+    SELECT MAX(s2.cgpa) 
+    FROM academics.students s2 
+    WHERE s2.dept_id = s.dept_id
+);
+
+Q5
+SELECT dept_name, avg_cgpa 
+FROM (
+    SELECT d.dept_name, ROUND(AVG(s.cgpa), 2) AS avg_cgpa 
+    FROM academics.departments d 
+    JOIN academics.students s ON d.dept_id = s.dept_id 
+    GROUP BY d.dept_name
+) AS dept_averages 
+WHERE avg_cgpa > 7.0;
+
+Q6
+SELECT c.course_id, c.course_name 
+FROM academics.courses c 
+WHERE EXISTS (
+    SELECT 1 
+    FROM academics.enrollments e 
+    JOIN academics.students s ON e.student_id = s.student_id 
+    JOIN academics.departments d ON s.dept_id = d.dept_id 
+    WHERE e.course_id = c.course_id 
+      AND d.dept_name = 'Computer Science'
+);
+
+Q7
+WITH high_achievers AS (
+    SELECT student_id, student_name AS full_name 
+    FROM academics.students 
+    WHERE cgpa >= 8.0
+)
+SELECT h.full_name, c.course_name, e.grade 
+FROM high_achievers h 
+JOIN academics.enrollments e ON h.student_id = e.student_id 
+JOIN academics.courses c ON e.course_id = c.course_id 
+ORDER BY h.full_name, c.course_name;
+
+Q8
+WITH overall_avg AS (
+    SELECT AVG(cgpa) AS overall_cgpa 
+    FROM academics.students
+),
+dept_avg AS (
+    SELECT d.dept_name, AVG(s.cgpa) AS dept_cgpa 
+    FROM academics.departments d 
+    JOIN academics.students s ON d.dept_id = s.dept_id 
+    GROUP BY d.dept_name
+)
+SELECT d.dept_name, ROUND(d.dept_cgpa, 2) AS dept_avg, ROUND(o.overall_cgpa, 2) AS overall_avg 
+FROM dept_avg d, overall_avg o 
+WHERE d.dept_cgpa > o.overall_cgpa;
+
+Q9
+WITH course_counts AS (
+    SELECT course_id, COUNT(*) AS enrollment_count 
+    FROM academics.enrollments 
+    GROUP BY course_id
+)
+SELECT c.course_name, cc.enrollment_count 
+FROM course_counts cc 
+JOIN academics.courses c ON cc.course_id = c.course_id 
+WHERE cc.enrollment_count > 2 
+ORDER BY cc.enrollment_count DESC;
+
+Q10
+a)
+SELECT s.student_name AS full_name, s.cgpa, s.dept_id 
+FROM academics.students s 
+WHERE s.cgpa > (
+    SELECT AVG(s2.cgpa) 
+    FROM academics.students s2 
+    WHERE s2.dept_id = s.dept_id
+);
+
+b)
+SELECT s.student_name AS full_name, s.cgpa, s.dept_id 
+FROM academics.students s 
+JOIN (
+    SELECT dept_id, AVG(cgpa) AS avg_dept_cgpa 
+    FROM academics.students 
+    GROUP BY dept_id
+) da ON s.dept_id = da.dept_id 
+WHERE s.cgpa > da.avg_dept_cgpa;
+
+c)
+I prefer the JOIN version because it calculates the department average once for each department rather than recalculating it row by row, which is generally faster for larger datasets.
+
+Q11
+WITH RECURSIVE employee_hierarchy AS (
+    SELECT 
+        emp_id, 
+        emp_name, 
+        manager_id, 
+        CAST(NULL AS VARCHAR(100)) AS manager_name, 
+        1 AS level 
+    FROM academics.employees 
+    WHERE manager_id IS NULL
+    
+    UNION ALL
+    
+    SELECT 
+        e.emp_id, 
+        e.emp_name, 
+        e.manager_id, 
+        eh.emp_name AS manager_name, 
+        eh.level + 1 
+    FROM academics.employees e 
+    JOIN employee_hierarchy eh ON e.manager_id = eh.emp_id
+)
+SELECT emp_name, manager_name, level 
+FROM employee_hierarchy 
+ORDER BY level, emp_name;
+
+Q12
+WITH student_details AS (
+    SELECT s.student_id, s.student_name, d.dept_name AS student_dept 
+    FROM academics.students s 
+    JOIN academics.departments d ON s.dept_id = d.dept_id
+),
+course_details AS (
+    SELECT c.course_id, c.course_name, d.dept_name AS course_dept 
+    FROM academics.courses c 
+    JOIN academics.departments d ON c.dept_id = d.dept_id
+)
+SELECT 
+    sd.student_name, 
+    sd.student_dept, 
+    cd.course_name, 
+    cd.course_dept, 
+    e.grade 
+FROM academics.enrollments e 
+JOIN student_details sd ON e.student_id = sd.student_id 
+JOIN course_details cd ON e.course_id = cd.course_id 
+WHERE e.grade IN ('A', 'A+') 
+  AND sd.student_dept <> cd.course_dept;

@@ -11,7 +11,7 @@ namespace Student_GPA
             int[] marks = { 88, 76, 105, 65, -10, 70, 60 };
             foreach (int m in marks)
             {
-                if (m < 0) Console.WriteLine("valid");
+                if (m > 0) Console.WriteLine("valid");
                 else throw new InvalidMarksException(m);
             }
         }
