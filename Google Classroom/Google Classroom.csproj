@@ -45,6 +45,7 @@
     <Folder Include="Week 7\Day 1\03 Assignment_ Keys &amp; Constraints\" />
     <Folder Include="Week 7\Day 2\Assignment_ Joins &amp; its Types\" />
     <Folder Include="Week 7\Day 3\Assignment_ Sub-queries &amp; CTEs\" />
+    <Folder Include="Week 7\Day 4\Assignment_ Temporary Tables &amp; Views\" />
   </ItemGroup>
 
   <ItemGroup>

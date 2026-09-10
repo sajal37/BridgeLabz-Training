@@ -1,0 +1,131 @@
+Q1
+CREATE TEMP TABLE temp_top_students AS 
+SELECT student_id, student_name AS full_name, cgpa 
+FROM academics.students 
+WHERE cgpa >= 7.5;
+
+SELECT * FROM temp_top_students 
+ORDER BY cgpa DESC;
+
+Q2
+SELECT t.full_name, c.course_name, e.grade 
+FROM temp_top_students t 
+JOIN academics.enrollments e ON t.student_id = e.student_id 
+JOIN academics.courses c ON e.course_id = c.course_id;
+
+Q3
+a)
+CREATE TEMP TABLE temp_demo (id INT);
+INSERT INTO temp_demo VALUES (1);
+
+b)
+If you open a new Query Tool tab and try to run SELECT * FROM temp_demo;, it will give an error saying relation "temp_demo" does not exist because temporary tables only exist inside the specific session where they were created.
+
+c)
+DROP TABLE temp_demo;
+
+Q4
+CREATE VIEW academics.v_students_with_dept AS 
+SELECT s.student_id, s.student_name AS full_name, s.cgpa, d.dept_name 
+FROM academics.students s 
+LEFT JOIN academics.departments d ON s.dept_id = d.dept_id;
+
+Q5
+SELECT * 
+FROM academics.v_students_with_dept 
+WHERE cgpa > 8.0 
+ORDER BY cgpa DESC;
+
+Q6
+CREATE VIEW academics.v_dept_stats AS 
+SELECT 
+    d.dept_name, 
+    COUNT(s.student_id) AS student_count, 
+    ROUND(AVG(s.cgpa), 2) AS avg_cgpa 
+FROM academics.departments d 
+LEFT JOIN academics.students s ON d.dept_id = s.dept_id 
+GROUP BY d.dept_id, d.dept_name;
+
+Q7
+CREATE VIEW academics.v_enrollment_report AS 
+SELECT 
+    s.student_name, 
+    sd.dept_name AS student_dept, 
+    c.course_name, 
+    cd.dept_name AS course_dept, 
+    e.grade, 
+    e.enroll_date 
+FROM academics.students s 
+JOIN academics.enrollments e ON s.student_id = e.student_id 
+JOIN academics.courses c ON e.course_id = c.course_id 
+LEFT JOIN academics.departments sd ON s.dept_id = sd.dept_id 
+LEFT JOIN academics.departments cd ON c.dept_id = cd.dept_id;
+
+Q8
+CREATE OR REPLACE VIEW academics.v_students_with_dept AS 
+SELECT s.student_id, s.student_name AS full_name, s.email, s.cgpa, d.dept_name 
+FROM academics.students s 
+LEFT JOIN academics.departments d ON s.dept_id = d.dept_id;
+
+SELECT * FROM academics.v_students_with_dept;
+
+Q9
+a)
+CREATE VIEW academics.v_student_cgpa AS 
+SELECT student_id, student_name AS full_name, cgpa 
+FROM academics.students;
+
+b)
+UPDATE academics.v_student_cgpa 
+SET cgpa = 9.20 
+WHERE student_id = 1;
+
+c)
+SELECT student_id, student_name, cgpa 
+FROM academics.students 
+WHERE student_id = 1;
+
+d)
+v_student_cgpa is updatable because it selects directly from a single table without any joins or aggregates. On the other hand, v_enrollment_report joins multiple tables, so PostgreSQL does not allow direct updates.
+
+Q10
+CREATE TEMP TABLE temp_enroll_count AS 
+SELECT student_id, COUNT(course_id) AS courses_taken 
+FROM academics.enrollments 
+GROUP BY student_id;
+
+CREATE TEMP TABLE temp_high_grades AS 
+SELECT student_id, COUNT(*) AS high_grade_count 
+FROM academics.enrollments 
+WHERE grade IN ('A', 'A+') 
+GROUP BY student_id;
+
+SELECT 
+    s.student_name AS full_name, 
+    COALESCE(ec.courses_taken, 0) AS courses_taken, 
+    COALESCE(hg.high_grade_count, 0) AS high_grade_count 
+FROM academics.students s 
+LEFT JOIN temp_enroll_count ec ON s.student_id = ec.student_id 
+LEFT JOIN temp_high_grades hg ON s.student_id = hg.student_id;
+
+Q11
+a)
+View - It provides a reusable, central query definition that multiple users can run consistently without repeating code.
+
+b)
+CTE - It is best for breaking down a complex query into readable intermediate steps within a single execution.
+
+c)
+TEMP table - It stores intermediate results physically during the session, allowing us to index them and run multiple queries efficiently.
+
+Q12
+a)
+DROP TABLE IF EXISTS temp_top_students;
+DROP TABLE IF EXISTS temp_enroll_count;
+DROP TABLE IF EXISTS temp_high_grades;
+
+b)
+DROP VIEW IF EXISTS academics.v_student_cgpa;
+
+c)
+A permanent table with a scheduled job is better when the data takes long to calculate and needs to be accessed by many users or dashboards across different sessions. It avoids recalculating the same heavy query repeatedly.
