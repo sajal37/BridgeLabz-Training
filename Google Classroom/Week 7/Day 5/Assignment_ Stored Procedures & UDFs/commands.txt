@@ -1,0 +1,241 @@
+Q1
+CREATE OR REPLACE FUNCTION academics.grade_to_points(p_grade CHAR(2)) 
+RETURNS NUMERIC AS $$
+BEGIN
+    RETURN CASE UPPER(TRIM(p_grade))
+        WHEN 'A+' THEN 10
+        WHEN 'A'  THEN 9
+        WHEN 'B+' THEN 8
+        WHEN 'B'  THEN 7
+        WHEN 'C'  THEN 6
+        WHEN 'F'  THEN 0
+        ELSE NULL
+    END;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT academics.grade_to_points('A+');
+
+Q2
+CREATE OR REPLACE FUNCTION academics.cgpa_category(
+    p_cgpa NUMERIC, 
+    p_pass_mark NUMERIC DEFAULT 6.0
+) 
+RETURNS TEXT AS $$
+BEGIN
+    IF p_cgpa IS NULL THEN
+        RETURN 'Unknown';
+    ELSIF p_cgpa >= 9.0 THEN
+        RETURN 'Excellent';
+    ELSIF p_cgpa >= 7.0 THEN
+        RETURN 'Good';
+    ELSIF p_cgpa >= p_pass_mark THEN
+        RETURN 'Average';
+    ELSE
+        RETURN 'Fail';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT academics.cgpa_category(8.5);
+SELECT academics.cgpa_category(5.5, 5.0);
+SELECT academics.cgpa_category(NULL);
+
+Q3
+CREATE OR REPLACE FUNCTION academics.get_dept_students(p_dept_id INTEGER) 
+RETURNS TABLE(student_id INTEGER, full_name VARCHAR, cgpa NUMERIC) AS $$
+BEGIN
+    RETURN QUERY 
+    SELECT s.student_id, s.student_name::VARCHAR, s.cgpa 
+    FROM academics.students s 
+    WHERE s.dept_id = p_dept_id 
+    ORDER BY s.cgpa DESC;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM academics.get_dept_students(1);
+
+Q4
+CREATE OR REPLACE FUNCTION academics.calc_gpa(p_student_id INTEGER) 
+RETURNS NUMERIC AS $$
+DECLARE
+    v_avg NUMERIC;
+BEGIN
+    SELECT ROUND(AVG(academics.grade_to_points(grade)), 2) 
+    INTO v_avg 
+    FROM academics.enrollments 
+    WHERE student_id = p_student_id 
+      AND grade IS NOT NULL;
+
+    RETURN v_avg;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT academics.calc_gpa(1);
+SELECT academics.calc_gpa(2);
+
+Q5
+CREATE OR REPLACE PROCEDURE academics.enroll_student(
+    p_student_id INTEGER, 
+    p_course_id INTEGER, 
+    p_grade CHAR(2) DEFAULT NULL
+) 
+LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO academics.enrollments (student_id, course_id, enroll_date, grade)
+    VALUES (p_student_id, p_course_id, CURRENT_DATE, p_grade);
+END;
+$$;
+
+CALL academics.enroll_student(1, 4, 'B+');
+
+Q6
+CREATE OR REPLACE PROCEDURE academics.enroll_student(
+    p_student_id INTEGER, 
+    p_course_id INTEGER, 
+    p_grade CHAR(2) DEFAULT NULL
+) 
+LANGUAGE plpgsql AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM academics.students WHERE student_id = p_student_id) THEN
+        RAISE EXCEPTION 'Student ID % does not exist', p_student_id;
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM academics.courses WHERE course_id = p_course_id) THEN
+        RAISE EXCEPTION 'Course ID % does not exist', p_course_id;
+    END IF;
+
+    BEGIN
+        INSERT INTO academics.enrollments (student_id, course_id, enroll_date, grade)
+        VALUES (p_student_id, p_course_id, CURRENT_DATE, p_grade);
+    EXCEPTION
+        WHEN unique_violation THEN
+            RAISE NOTICE 'Student % is already enrolled in course %', p_student_id, p_course_id;
+    END;
+END;
+$$;
+
+CALL academics.enroll_student(2, 3, 'A');
+CALL academics.enroll_student(2, 3, 'A');
+CALL academics.enroll_student(9999, 1);
+CALL academics.enroll_student(1, 9999);
+
+Q7
+CREATE OR REPLACE PROCEDURE academics.dept_summary(
+    p_dept_id INTEGER, 
+    OUT student_count INTEGER, 
+    OUT avg_cgpa NUMERIC
+) 
+LANGUAGE plpgsql AS $$
+BEGIN
+    SELECT COUNT(*), ROUND(AVG(cgpa), 2) 
+    INTO student_count, avg_cgpa 
+    FROM academics.students 
+    WHERE dept_id = p_dept_id;
+END;
+$$;
+
+CALL academics.dept_summary(1, NULL, NULL);
+
+Q8
+CREATE OR REPLACE PROCEDURE academics.transfer_student(
+    p_student_id INTEGER, 
+    p_new_dept_id INTEGER
+) 
+LANGUAGE plpgsql AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM academics.students WHERE student_id = p_student_id) THEN
+        RAISE EXCEPTION 'Student ID % does not exist', p_student_id;
+    END IF;
+
+    IF NOT EXISTS (SELECT 1 FROM academics.departments WHERE dept_id = p_new_dept_id) THEN
+        RAISE EXCEPTION 'Department ID % does not exist', p_new_dept_id;
+    END IF;
+
+    UPDATE academics.students 
+    SET dept_id = p_new_dept_id 
+    WHERE student_id = p_student_id;
+
+    RAISE NOTICE 'Student % successfully transferred to department %', p_student_id, p_new_dept_id;
+END;
+$$;
+
+CALL academics.transfer_student(1, 2);
+CALL academics.transfer_student(1, 999);
+
+Q9
+CREATE OR REPLACE FUNCTION academics.letter_from_cgpa(p_cgpa NUMERIC) 
+RETURNS CHAR(2) AS $$
+BEGIN
+    IF p_cgpa IS NULL THEN
+        RETURN NULL;
+    ELSIF p_cgpa >= 9.0 THEN
+        RETURN 'A+';
+    ELSIF p_cgpa >= 8.0 THEN
+        RETURN 'A';
+    ELSIF p_cgpa >= 7.0 THEN
+        RETURN 'B+';
+    ELSIF p_cgpa >= 6.0 THEN
+        RETURN 'B';
+    ELSIF p_cgpa >= 5.0 THEN
+        RETURN 'C';
+    ELSE
+        RETURN 'F';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT academics.letter_from_cgpa(9.4);
+SELECT academics.letter_from_cgpa(7.2);
+SELECT academics.letter_from_cgpa(NULL);
+
+Q10
+CREATE OR REPLACE FUNCTION academics.student_course_report(p_student_id INTEGER) 
+RETURNS TABLE(course_name VARCHAR, grade CHAR(2), points NUMERIC) AS $$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        c.course_name::VARCHAR, 
+        e.grade, 
+        academics.grade_to_points(e.grade) 
+    FROM academics.enrollments e 
+    JOIN academics.courses c ON e.course_id = c.course_id 
+    WHERE e.student_id = p_student_id;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT * FROM academics.student_course_report(1);
+
+Q11
+CREATE OR REPLACE PROCEDURE academics.bulk_update_grade(
+    p_course_id INTEGER, 
+    p_old_grade CHAR(2), 
+    p_new_grade CHAR(2)
+) 
+LANGUAGE plpgsql AS $$
+DECLARE
+    v_rows_updated INT;
+BEGIN
+    UPDATE academics.enrollments 
+    SET grade = p_new_grade 
+    WHERE course_id = p_course_id 
+      AND grade = p_old_grade;
+
+    GET DIAGNOSTICS v_rows_updated = ROW_COUNT;
+    RAISE NOTICE 'Updated % enrollment rows from % to %', v_rows_updated, p_old_grade, p_new_grade;
+END;
+$$;
+
+CALL academics.bulk_update_grade(1, 'B', 'B+');
+
+Q12
+a)
+SELECT routine_name, routine_type 
+FROM information_schema.routines 
+WHERE routine_schema = 'academics';
+
+b)
+DROP PROCEDURE IF EXISTS academics.bulk_update_grade(INTEGER, CHAR(2), CHAR(2));
+
+c)
+Use a Function when you need to compute and return a value or table that can be called directly inside SQL queries (SELECT, WHERE, JOIN). Use a Procedure when performing business operations with transactions (COMMIT/ROLLBACK) or when actions do not need to return a value directly into a query expression.
