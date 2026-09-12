@@ -47,6 +47,7 @@
     <Folder Include="Week 7\Day 3\Assignment_ Sub-queries &amp; CTEs\" />
     <Folder Include="Week 7\Day 4\Assignment_ Temporary Tables &amp; Views\" />
     <Folder Include="Week 7\Day 5\Assignment_ Stored Procedures &amp; UDFs\" />
+    <Folder Include="Week 7\Day 6\Assignment_ Cursors &amp; Triggers\" />
   </ItemGroup>
 
   <ItemGroup>

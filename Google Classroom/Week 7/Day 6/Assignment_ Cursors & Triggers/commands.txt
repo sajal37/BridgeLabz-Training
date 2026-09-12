@@ -1,0 +1,280 @@
+Q1
+DO $$
+DECLARE
+    rec RECORD;
+BEGIN
+    FOR rec IN 
+        SELECT student_name AS full_name, cgpa 
+        FROM academics.students 
+        WHERE cgpa >= 7.0 
+        ORDER BY cgpa DESC
+    LOOP
+        RAISE NOTICE 'Student: %, CGPA: %', rec.full_name, rec.cgpa;
+    END LOOP;
+END;
+$$;
+
+Q2
+DO $$
+DECLARE
+    cur_dept CURSOR (p_dept_id INT) FOR 
+        SELECT student_name 
+        FROM academics.students 
+        WHERE dept_id = p_dept_id;
+    v_name VARCHAR(100);
+BEGIN
+    OPEN cur_dept(1);
+    LOOP
+        FETCH cur_dept INTO v_name;
+        EXIT WHEN NOT FOUND;
+        RAISE NOTICE 'Student Name: %', v_name;
+    END LOOP;
+    CLOSE cur_dept;
+END;
+$$;
+
+Q3
+DO $$
+DECLARE
+    rec RECORD;
+    v_points NUMERIC;
+BEGIN
+    FOR rec IN 
+        SELECT student_id, course_id, grade 
+        FROM academics.enrollments 
+        WHERE grade IS NOT NULL
+    LOOP
+        v_points := academics.grade_to_points(rec.grade);
+        RAISE NOTICE 'Student: %, Course: %, Grade: %, Points: %', rec.student_id, rec.course_id, rec.grade, v_points;
+    END LOOP;
+END;
+$$;
+
+Q4
+CREATE TABLE academics.cgpa_audit (
+    audit_id SERIAL PRIMARY KEY,
+    student_id INT,
+    old_cgpa NUMERIC,
+    new_cgpa NUMERIC,
+    changed_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE OR REPLACE FUNCTION academics.trg_log_cgpa_change() 
+RETURNS TRIGGER AS $$
+BEGIN
+    IF OLD.cgpa IS DISTINCT FROM NEW.cgpa THEN
+        INSERT INTO academics.cgpa_audit (student_id, old_cgpa, new_cgpa)
+        VALUES (OLD.student_id, OLD.cgpa, NEW.cgpa);
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_student_cgpa_update
+AFTER UPDATE OF cgpa ON academics.students
+FOR EACH ROW
+EXECUTE FUNCTION academics.trg_log_cgpa_change();
+
+UPDATE academics.students 
+SET cgpa = 8.75 
+WHERE student_id = 1;
+
+SELECT * FROM academics.cgpa_audit;
+
+Q5
+CREATE OR REPLACE FUNCTION academics.trg_validate_enroll_date() 
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.enroll_date IS NULL THEN
+        NEW.enroll_date := CURRENT_DATE;
+    END IF;
+
+    IF NEW.enroll_date > CURRENT_DATE THEN
+        RAISE EXCEPTION 'Enrollment date cannot be in the future: %', NEW.enroll_date;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_enrollment_before_insert
+BEFORE INSERT OR UPDATE ON academics.enrollments
+FOR EACH ROW
+EXECUTE FUNCTION academics.trg_validate_enroll_date();
+
+INSERT INTO academics.enrollments (student_id, course_id, enroll_date, grade)
+VALUES (1, 5, NULL, 'B');
+
+INSERT INTO academics.enrollments (student_id, course_id, enroll_date, grade)
+VALUES (1, 6, CURRENT_DATE + 5, 'A');
+
+Q6
+CREATE OR REPLACE FUNCTION academics.trg_protect_dept_delete() 
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM academics.students WHERE dept_id = OLD.dept_id) THEN
+        RAISE EXCEPTION 'Cannot delete department "%" because students are still enrolled in it', OLD.dept_name;
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_before_dept_delete
+BEFORE DELETE ON academics.departments
+FOR EACH ROW
+EXECUTE FUNCTION academics.trg_protect_dept_delete();
+
+DELETE FROM academics.departments WHERE dept_id = 1;
+
+INSERT INTO academics.departments (dept_name) VALUES ('Temporary Dept') ON CONFLICT DO NOTHING;
+DELETE FROM academics.departments WHERE dept_name = 'Temporary Dept';
+
+Q7
+ALTER TABLE academics.courses 
+ADD COLUMN IF NOT EXISTS enroll_count INTEGER DEFAULT 0;
+
+UPDATE academics.courses c
+SET enroll_count = (
+    SELECT COUNT(*) 
+    FROM academics.enrollments e 
+    WHERE e.course_id = c.course_id
+);
+
+CREATE OR REPLACE FUNCTION academics.trg_sync_course_enroll_count() 
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        UPDATE academics.courses 
+        SET enroll_count = enroll_count + 1 
+        WHERE course_id = NEW.course_id;
+    ELSIF TG_OP = 'DELETE' THEN
+        UPDATE academics.courses 
+        SET enroll_count = GREATEST(enroll_count - 1, 0) 
+        WHERE course_id = OLD.course_id;
+    END IF;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_after_enrollment_change
+AFTER INSERT OR DELETE ON academics.enrollments
+FOR EACH ROW
+EXECUTE FUNCTION academics.trg_sync_course_enroll_count();
+
+INSERT INTO academics.enrollments (student_id, course_id, grade) VALUES (3, 4, 'A');
+SELECT course_id, course_name, enroll_count FROM academics.courses WHERE course_id = 4;
+
+DELETE FROM academics.enrollments WHERE student_id = 3 AND course_id = 4;
+SELECT course_id, course_name, enroll_count FROM academics.courses WHERE course_id = 4;
+
+Q8
+CREATE OR REPLACE FUNCTION academics.trg_validate_grade() 
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.grade IS NOT NULL THEN
+        IF academics.grade_to_points(NEW.grade) IS NULL THEN
+            RAISE EXCEPTION 'Invalid grade: %', NEW.grade;
+        END IF;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_before_enrollment_grade
+BEFORE INSERT OR UPDATE OF grade ON academics.enrollments
+FOR EACH ROW
+EXECUTE FUNCTION academics.trg_validate_grade();
+
+INSERT INTO academics.enrollments (student_id, course_id, grade) VALUES (2, 5, 'A');
+INSERT INTO academics.enrollments (student_id, course_id, grade) VALUES (2, 6, 'Z');
+
+Q9
+CREATE TABLE academics.students_audit (
+    audit_id SERIAL PRIMARY KEY,
+    student_id INT,
+    student_name VARCHAR(100),
+    action_type VARCHAR(10),
+    action_time TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE OR REPLACE FUNCTION academics.trg_audit_students() 
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'UPDATE' THEN
+        INSERT INTO academics.students_audit (student_id, student_name, action_type)
+        VALUES (NEW.student_id, NEW.student_name, 'UPDATE');
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        INSERT INTO academics.students_audit (student_id, student_name, action_type)
+        VALUES (OLD.student_id, OLD.student_name, 'DELETE');
+        RETURN OLD;
+    END IF;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_after_student_ops
+AFTER UPDATE OR DELETE ON academics.students
+FOR EACH ROW
+EXECUTE FUNCTION academics.trg_audit_students();
+
+UPDATE academics.students SET cgpa = 8.80 WHERE student_id = 1;
+
+INSERT INTO academics.students (student_name, email, dept_id, cgpa, age) 
+VALUES ('Dummy Student', 'dummy@gmail.com', 1, 7.0, 20);
+
+DELETE FROM academics.students WHERE email = 'dummy@gmail.com';
+
+SELECT * FROM academics.students_audit;
+
+Q10
+a)
+ALTER TABLE academics.enrollments DISABLE TRIGGER trg_before_enrollment_grade;
+
+b)
+INSERT INTO academics.enrollments (student_id, course_id, grade) VALUES (3, 6, 'Z');
+
+c)
+ALTER TABLE academics.enrollments ENABLE TRIGGER trg_before_enrollment_grade;
+
+d)
+DELETE FROM academics.enrollments WHERE student_id = 3 AND course_id = 6;
+DROP TRIGGER IF EXISTS trg_before_enrollment_grade ON academics.enrollments;
+
+Q11
+a)
+DO $$
+DECLARE
+    cur_students CURSOR FOR SELECT cgpa FROM academics.students WHERE cgpa > 8.0;
+    v_cgpa NUMERIC;
+    v_count INT := 0;
+BEGIN
+    OPEN cur_students;
+    LOOP
+        FETCH cur_students INTO v_cgpa;
+        EXIT WHEN NOT FOUND;
+        v_count := v_count + 1;
+    END LOOP;
+    CLOSE cur_students;
+    RAISE NOTICE 'Total students with CGPA > 8: %', v_count;
+END;
+$$;
+
+b)
+SELECT COUNT(*) FROM academics.students WHERE cgpa > 8.0;
+
+c)
+A cursor is useful when you have to do complex row-by-row work that normal SQL queries cannot handle easily, like sending emails or calling external APIs for each row. It also helps if processing a huge dataset all at once consumes too much memory, so taking one row at a time is safer.
+
+Q12
+a)
+SELECT event_object_table, trigger_name, event_manipulation, action_timing 
+FROM information_schema.triggers 
+WHERE trigger_schema = 'academics';
+
+b)
+DROP TRIGGER IF EXISTS trg_after_student_ops ON academics.students;
+DROP TABLE IF EXISTS academics.students_audit;
+
+c)
+A good business rule for a trigger is automatically recalculating and updating a course's available seats whenever a student enrolls or cancels. If we rely only on application code, someone updating the database directly through pgAdmin or another service might skip the seat check, which leads to overbooking and inconsistent data.
