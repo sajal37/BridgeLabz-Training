@@ -1,0 +1,131 @@
+Q1
+CREATE INDEX IF NOT EXISTS idx_students_dept_id 
+ON academics.students (dept_id);
+
+CREATE INDEX IF NOT EXISTS idx_enrollments_course_id 
+ON academics.enrollments (course_id);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_students_email_unique 
+ON academics.students (email);
+
+Q2
+a)
+CREATE INDEX IF NOT EXISTS idx_enrollments_student_course 
+ON academics.enrollments (student_id, course_id);
+
+b)
+CREATE INDEX IF NOT EXISTS idx_students_high_cgpa 
+ON academics.students (cgpa) 
+WHERE cgpa >= 8.0;
+
+c)
+SELECT indexname, indexdef 
+FROM pg_indexes 
+WHERE schemaname = 'academics' 
+  AND tablename = 'students';
+
+Q3
+EXPLAIN ANALYZE 
+SELECT * FROM academics.students WHERE dept_id = 1;
+
+Seq Scan on students  (cost=0.00..1.12 rows=3 width=142) (actual time=0.015..0.018 rows=3 loops=1)
+  Filter: (dept_id = 1)
+Planning Time: 0.082 ms
+Execution Time: 0.035 ms
+
+Observation:
+PostgreSQL picks a Seq Scan instead of an Index Scan even after creating the index on dept_id. This is because our students table has only a few rows, and scanning the table sequentially is faster and cheaper for the query planner than reading index blocks first.
+
+Q4
+a)
+CREATE INDEX IF NOT EXISTS idx_students_dept_id 
+ON academics.students (dept_id);
+
+CREATE INDEX IF NOT EXISTS idx_enrollments_grade_student 
+ON academics.enrollments (grade, student_id);
+
+b)
+EXPLAIN ANALYZE
+SELECT s.student_name AS full_name, e.grade
+FROM academics.students s
+JOIN academics.enrollments e ON s.student_id = e.student_id
+WHERE e.grade = 'A+' AND s.dept_id = 2;
+
+Observation:
+The composite index on enrollments(grade, student_id) allows PostgreSQL to filter directly for rows where grade = 'A+' and join on student_id without scanning unrelated enrollment rows. On larger tables, this improves performance by avoiding full table scans.
+
+Q5
+BEGIN;
+
+SELECT * FROM academics.students 
+WHERE student_id = 1 
+FOR UPDATE;
+
+UPDATE academics.students 
+SET cgpa = 8.95 
+WHERE student_id = 1;
+
+COMMIT;
+
+Explanation:
+If another session tries to run an UPDATE or SELECT FOR UPDATE on student_id = 1 while this transaction is still open, it will pause and wait. It stays blocked until the first transaction completes with COMMIT or ROLLBACK.
+
+Q6
+Session A:
+BEGIN;
+SELECT * FROM academics.students WHERE student_id = 1 FOR UPDATE;
+
+Session B:
+UPDATE academics.students SET cgpa = 9.10 WHERE student_id = 1;
+
+Session A:
+COMMIT;
+
+Observation:
+When running the update in Session B, the command did not execute immediately—it stayed in a waiting state because Session A held an exclusive lock on that row. The moment Session A ran COMMIT, Session B immediately unblocked and finished its update.
+
+Q7
+A deadlock happens when two transactions are waiting on each other to release a lock, so neither one can continue. For example, Transaction 1 locks student 1 and waits for student 2, while Transaction 2 locks student 2 and waits for student 1. When PostgreSQL detects this circular wait, it automatically aborts one of the transactions with a deadlock error so the other one can finish. The best way to prevent deadlocks in application code is to always update rows and tables in the exact same order across all queries.
+
+Q8
+Yes, our current schema satisfies 1NF because every column stores atomic values and each table has a primary key. A design that violates 1NF would be storing multiple course names in a single comma-separated column like courses = 'Maths, DBMS, Physics' in the students table, or storing multiple phone numbers in one column. That violates 1NF because the values are not atomic.
+
+Q9
+In the enrollments table, the primary key is the composite key (student_id, course_id). Adding student_full_name violates 2NF because student_full_name depends only on student_id, not on the entire composite key. This is a partial dependency. Instead, the student name should be stored only once in the students table and referenced in enrollments using the student_id foreign key.
+
+Q10
+a)
+Partial dependencies:
+student_name depends only on student_id.
+course_name, dept_id depend only on course_id.
+
+Transitive dependency:
+course_id -> dept_id -> dept_name (dept_name depends on dept_id, which is not the primary key).
+
+b)
+Normalized tables for 3NF:
+departments (dept_id PK, dept_name)
+courses (course_id PK, course_name, dept_id FK)
+students (student_id PK, student_name, dept_id FK)
+enrollments (student_id FK, course_id FK, grade, PK is (student_id, course_id))
+
+c)
+Yes, our actual college schema matches this normalized 3NF design.
+
+Q11
+Adding enroll_count to courses is denormalization because the value is already derivable by counting rows in the enrollments table, so it introduces redundant data. The read benefit is that queries showing course catalogs can display the total enrolled students instantly with a simple SELECT, without needing an expensive COUNT() join across thousands of enrollment records. The risk is data inconsistency: if the trigger is disabled, fails, or someone bypasses it during bulk updates, enroll_count will become incorrect and out of sync with actual data.
+
+Q12
+1. Essential indexes:
+- Primary key indexes on all tables (student_id, course_id, dept_id, composite key on enrollments).
+- Foreign key indexes on students(dept_id) and enrollments(course_id) to speed up joins.
+- Unique index on students(email) to avoid duplicate emails and allow quick student lookup.
+
+2. Columns that could use an index:
+- enrollments(grade) can be indexed if reports frequently filter for specific grades like 'A+' or 'F'.
+
+3. 3NF status:
+- The schema is fully in 3NF. The only intentional denormalization is courses.enroll_count to optimize read performance.
+
+4. Drop experimental index:
+DROP INDEX IF EXISTS academics.idx_students_high_cgpa;
